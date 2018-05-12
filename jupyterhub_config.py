@@ -1,7 +1,9 @@
 # Configuration file for jupyterhub.
 
 # jupyterhub_config.py file
+
 c = get_config()
+c.Spawner.cmd = '/home/peter/anaconda3/bin/jupyterhub-singleuser'
 
 #import os
 #pjoin = os.path.join
@@ -12,7 +14,7 @@ c = get_config()
 #    os.makedirs(ssl_dir)
 
 # Allows multiple single-server per user
-c.JupyterHub.allow_named_servers = True
+#c.JupyterHub.allow_named_servers = True
 
 # https on :443
 #c.JupyterHub.port = 443
@@ -21,11 +23,11 @@ c.JupyterHub.allow_named_servers = True
 
 
 # from  http://jupyterhub.readthedocs.io/en/latest/reference/config-proxy.html
-c.JupyterHub.ip = '127.0.0.1'
+#c.JupyterHub.ip = '127.0.0.1'
 
-c.JupterHub.ssl_cert='/usr/local/etc/letsencrypt/live/notebooks.countryfairycampground.com/fullchain.pem'
-c.JupyterHub.ssl_key='/usr/local/etc/letsencrypt/live/notebooks.countryfairycampground.com/privkey.pem'
-c.JupyterHub.port = 443
+#c.JupterHub.ssl_cert='/usr/local/etc/letsencrypt/live/notebooks.countryfairycampground.com/fullchain.pem'
+#c.JupyterHub.ssl_key='/usr/local/etc/letsencrypt/live/notebooks.countryfairycampground.com/privkey.pem'
+3c.JupyterHub.port = 443
 
 #------------------------------------------------------------------------------
 # Application(SingletonConfigurable) configuration
