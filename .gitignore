@@ -152,3 +152,6 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+
+# My custom .env with a .txt extension
+.env.txt
