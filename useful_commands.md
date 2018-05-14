@@ -20,8 +20,17 @@ sudo /home/peter/anaconda3/bin/jupyterhub
 sudo systemctl start jupyterhub
 sudo systemctl <start|stop|status> jupyterhub
 
+# Add environmental variables:
+
+$ export OAUTH_CLIENT_SECRET=xxxxxxxxxxx
 
 
+#change the systemctl start jupyterhub configurations
+
+# if changes are made to /etc/systemd/system/jupyterhub.service need to reload:
+
+$ sudo systemctl daemon-reload
+$ sudo systemctl start jupyterhub
 
 Similar to the above but with a couple changes. Assuming you're using /opt/anaconda3/jupyterhub for your configs, save this as /etc/systemd/system/jupyterhub.service
 
