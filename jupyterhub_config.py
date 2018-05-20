@@ -2,8 +2,28 @@
 
 # jupyterhub_config.py file
 
+
+import os
 c = get_config()
+c.JupyterHub.log_level = 10
 c.Spawner.cmd = '/home/peter/anaconda3/bin/jupyterhub-singleuser'
+
+# For Google OAuth Authentication
+from oauthenticator.google import LocalGoogleOAuthenticator
+c.JupyterHub.authenticator_class = LocalGoogleOAuthenticator
+
+c.LocalGoogleOAuthenticator.create_system_users = True
+
+c.LocalGoogleOAuthenticator.hosted_domain = 'pcc.edu'
+c.LocalGoogleOAuthenticator.login_service = 'Portland Community College'
+
+c.LocalGoogleOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
+c.LocalGoogleOAuthenticator.oauth_client_id = os.environ['OAUTH_CLIENT_ID']
+c.LocalGoogleOAuthenticator.oauth_client_secret = os.environ['OAUTH_CLIENT_SECRET']
+#c.JupyterHub.cookie_secret_file = '/srv/jupyterhub/jupyterhub_cookie_secret'
+c.Authenticator.add_user_cmd = ['adduser', '-q', '--gecos', '""', '--disabled-password', '--force-badname']
+c.Authenticator.whitelist = {'peter.kazarinoff','peter','sergio.amador','dan.kruger'}
+c.Authenticator.admin_users = {'peter.kazarinoff'}
 
 #import os
 #pjoin = os.path.join
