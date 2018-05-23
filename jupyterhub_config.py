@@ -47,7 +47,7 @@ c.Authenticator.admin_users = {'peter.kazarinoff'}
 
 #c.JupterHub.ssl_cert='/usr/local/etc/letsencrypt/live/notebooks.countryfairycampground.com/fullchain.pem'
 #c.JupyterHub.ssl_key='/usr/local/etc/letsencrypt/live/notebooks.countryfairycampground.com/privkey.pem'
-3c.JupyterHub.port = 443
+c.JupyterHub.port = 443
 
 #------------------------------------------------------------------------------
 # Application(SingletonConfigurable) configuration
