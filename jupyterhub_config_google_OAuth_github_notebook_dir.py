@@ -1,8 +1,39 @@
-# from https://github.com/jupyterhub/jupyterhub/wiki/Installation-of-Jupyterhub-on-remote-server
+
+#jupyterhub_conf.py
+
 import os
+import git   #must have gitpython installed: $ conda install -c cona-forge gitpython
+
 c = get_config()
 c.JupyterHub.log_level = 10
 c.Spawner.cmd = '/home/peter/anaconda3/bin/jupyterhub-singleuser'
+
+# Cookie Secret Files
+c.JupyterHub.cookie_secret_file = '/srv/jupyterhub/jupyterhub_cookie_secret'
+c.ConfigurableHTTPProxy.auth_token = 'b04f3b3566f691bc2e03ac8625a76375cf7cbe5a39ef6e5715b64775ee2e14f3'
+
+
+##########################################################################
+
+# Add a notebooks directory to each users home folder pulled down from github
+def create_dir_hook(spawner):
+    username = spawner.user.name
+    DIR_NAME = os.path.join("/home",username,"notebooks")
+    REMOTE_URL = "https://github.com/ProfessorKazarinoff/ENGR101.git"
+    if not os.path.isdir(DIR_NAME):
+        os.mkdir(DIR_NAME)
+        repo = git.Repo.init(DIR_NAME)
+        origin = repo.create_remote('origin',REMOTE_URL)
+        origin.fetch()
+        origin.pull(origin.refs[0].remote_head)
+
+# add the pre-spawn function to the Spawner
+c.Spawner.pre_spawn_hook = create_dir_hook
+
+# launch the notebook server and have the 'notebooks' directory (populated with the content from github) be the one the$
+c.Spawner.notebook_dir = '~/notebooks'
+
+######################################################################
 
 # For Google OAuth Authentication
 from oauthenticator.google import LocalGoogleOAuthenticator
