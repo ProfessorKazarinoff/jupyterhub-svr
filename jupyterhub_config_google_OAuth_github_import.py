@@ -5,6 +5,8 @@ import git, os, shutil
 from git import Repo
 from pwd import getpwnam
 
+root_dir = os.path.dirname(__file__)
+
 c = get_config()
 c.JupyterHub.log_level = 10
 c.Spawner.cmd = '/home/peter/anaconda3/bin/jupyterhub-singleuser'
@@ -129,8 +131,29 @@ c.LocalGoogleOAuthenticator.oauth_client_id = '588899608603-ga2shvbhb7ib6lfrtcko
 
 c.LocalGoogleOAuthenticator.oauth_client_secret = 'UWcOfNihh6qoJGpUjNovAG1P'
 c.Authenticator.add_user_cmd = ['adduser', '-q', '--gecos', '""', '--disabled-password', '--force-badname']
-c.Authenticator.whitelist = {'peter.kazarinoff','peter','sergio.amador','dan.kruger','sophia.lichensteinhill'}
+#c.Authenticator.whitelist = {'peter.kazarinoff','peter','sergio.amador','dan.kruger','sophia.lichensteinhill'}
 c.Authenticator.admin_users = {'peter.kazarinoff'}
+
+c.Authenticator.whitelist = whitelist = set()
+
+from pcc_tools import user_lst_from_email_roster, user_lst_from_roster_csv
+
+extra_users = ['peter.kazarinoff',]
+
+for f in os.listdir(root_dir):
+    if f.endswith('roster.csv'):
+        user_list = user_lst_from_roster_csv(os.path.join(root_dir, f))
+    if f.endswith('roster.txt')
+        user_list = user_lst_from_email_roster(os.path.join(root_dir, f))
+
+if user_list:
+    for user in user_list:
+        whitelist.add(user)
+
+if extra_users:
+    for extra_user in extra_users:
+        whitelist.add(extra_user)
+
 
 
 #------------------------------------------------------------------------------
