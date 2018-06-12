@@ -4,8 +4,12 @@ import os
 import git, os, shutil
 from git import Repo
 from pwd import getpwnam
+import csv
 
 root_dir = os.path.dirname(__file__)
+
+# set users other than those in a roster.csv file
+extra_users = ['peter.kazarinoff', 'dan.kruger', 'david.goldman2', 'sergio.amador']
 
 c = get_config()
 c.JupyterHub.log_level = 10
@@ -22,6 +26,12 @@ ERASE_DIR = False
 ### from git_tools.py
 
 def create_dir_hook(spawner):
+    """
+    A function to clone a github repo into a specific directory of a jupyterhub user when the server spawns a new notebook instance.
+    :param spawner: a spawmer object that needs to be passed to the function.
+    Need c.Spawner.pre_spawn_hook = create_dir_hook in jupyterhub_config.py for it to work.
+    :return: None
+    """
     username = spawner.user.name
     # username = "peter.kazarinoff"
     # print(f'User Name: {username}')
@@ -65,6 +75,14 @@ def create_dir_hook(spawner):
 def clone_repo(user,
                git_url="https://github.com/ProfessorKazarinoff/ENGR101.git",
                repo_dir='notebooks'):
+    """
+    A function to clone a github repo into a specific directory of a user.
+    :param user: str, jupyter hub username ex: peter.kazarinoff
+    :param git_url: str, URL of github repo to clone ex: "https://github.com/ProfessorKazarinoff/ENGR101.git"
+    :param repo_dir: str, name of directory to clone github repo into. If set to 'notebooks' the github repo will be
+    cloned into /home/username/notebooks
+    :return: None
+    """
     Repo.clone_from(git_url, repo_dir)
     print(f'User Name: {user}')
     uid = getpwnam(user).pw_uid
@@ -132,25 +150,27 @@ def user_lst_from_roster_csv(csv_file):
 
 
 def user_lst_from_email_roster(txt_file):
-    '''
-    takes a roster.txt with
+    """
+    This function takes a roster.txt file containing username email addresses and outputs a set of username
+
+    inside roster.txt
 
     peter.kazarinoff@pcc.edu
-    even.baker@pcc.edu
     nelly.manning@pcc.edu
     jess.rod2@pcc.edu
 
-    and returns a list with
+    :param txt_file: str, file name of .txt file that contains usernames in the form of
 
-    ['peter.kazarinoff', 'even.baker','nelly.manning','jess.rod2']
+    peter.kazarinoff@pcc.edu
 
-    '''
+    :return: set, a set of usernames ex: {peter.kazarinoff, nelly.manning, jess.rod2}
+    """
     with open(txt_file, 'r') as f:
         return [x.split('@')[0] for x in f.readlines()]
 
 
 whitelist = set()
-extra_users = ['peter.kazarinoff', 'dan.kruger', 'david.goldman2', 'sergio.amador']
+user_list = []
 
 for f in os.listdir(root_dir):
     if f.endswith('roster.csv'):
