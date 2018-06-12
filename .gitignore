@@ -155,3 +155,10 @@ fabric.properties
 
 # My custom .env with a .txt extension
 .env.txt
+
+# Any studuent rosters
+*.csv
+*roster*
+roster.csv
+roster.txt
+*roster.csv
