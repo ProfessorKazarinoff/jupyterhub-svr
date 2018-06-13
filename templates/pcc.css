@@ -387,7 +387,9 @@ h1,
       background: linear-gradient(rgba(0, 128, 153, 0.7), rgba(0, 128, 153, 0.7)), url("../images/default-header-medium.png");
       background-repeat: no-repeat;
       background-color: #008099;
-      background-size: cover; }
+      background-size: cover;
+      margin: 16px -16px;
+	  padding: 16px;}
 
   #loginTable1 .row [class*="col-md-"] {
     margin: 0.625em 0;
