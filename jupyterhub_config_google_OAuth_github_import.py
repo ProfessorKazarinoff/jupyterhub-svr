@@ -101,14 +101,21 @@ def clone_repo(user,
             shutil.chown(os.path.join(root, f), user=uid, group=gid)
             print(f'changed permissions of {f} to uid = {uid} and gid = {gid}')
 
+def erase_files(file_lst=[],base_dir='notebooks'):
+    for file_name in file_lst:
+        if os.path.exists(os.path.join(base_dir,file_name)):
+            try:
+                os.remove(os.path.join(base_dir,file_name))
+            except:
+                print(f'Can not remove file: {os.path.join(base_dir,file_name)})
+
 
 # add the pre-spawn function to the Spawner
 # still some problems with permissions and notebooks can't be saved
 c.Spawner.pre_spawn_hook = create_dir_hook
 
 # launch the notebook server and have the 'notebooks' directory (populated with the content from github) be the one they land in
-# still some problems with permissions and notebooks can't be saved
-# c.Spawner.notebook_dir = '~/notebooks'
+c.Spawner.notebook_dir = '~/notebooks'
 
 # Cookie Secret Files
 c.JupyterHub.cookie_secret_file = '/srv/jupyterhub/jupyterhub_cookie_secret'
