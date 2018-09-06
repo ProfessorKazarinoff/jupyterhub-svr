@@ -1,10 +1,17 @@
 # jupyterhub-svr
-Deployment of Jupyter Hub on Digital Ocean with nginx proxy
+
+Deployment of Jupyter Hub on Digital Ocean with nginx proxy. See the blog posts:
+
+> [https://pythonforundergradengineers.com/why-jupyter-hub.html](https://pythonforundergradengineers.com/why-jupyter-hub.html)
+
+for an explanation of how get jupyterhub going on Digital Ocean.
 
 ## Deployment Docs
+
 This repo contains the shared files used to create a Jupyter Hub server on Digital Ocean using an nginx proxy server and SSL security. Hopefully I will have time to write the process up in order to share it with others.
 
 ## Basic Steps
+
 1. Get SSH public and private keys with PuTTYgen. Save SSH keys in Documents/ssh-keys
 2. Create a new Digital Ocean Droplet (DO server) running Ubuntu 16.04. Include SSH key when Droplet is created
 3. Log into DO server as root with PuTTY and SSH keys. Create a non-root sudo user.
