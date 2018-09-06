@@ -9,7 +9,7 @@ import shutil
 from git import Repo
 from pwd import getpwnam
 
-ERASE_DIR = False
+ERASE_DIR = True
 
 def create_dir_hook(username):
     # username = spawner.user.name

@@ -3,9 +3,13 @@ Description=Jupyterhub
 After=syslog.target network.target
 
 [Service]
-User=root
-Environment="PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/home/peter/anaconda3/bin"
+User=root 
+Environment="PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/home/peter/anaconda3/bin" 
+Environment="OAUTH_CALLBACK_URL=https://notebooks.problemsolving101withpython.com" 
+Environment="OAUTH_CLIENT_ID=588899608603-ga2shvbhb7ib6lfrtckob2tl3t8ifer5.apps.googleusercontent.com"
+Environment="OAUTH_CLIENT_SECRET=UWcOfNihh6qoJGpUjNovAG1P"
 ExecStart=/home/peter/anaconda3/bin/jupyterhub -f /home/peter/jupyterhub_config.py
+
 
 [Install]
 WantedBy=multi-user.target
