@@ -24,10 +24,10 @@ c.JupyterHub.template_vars = {'announcement_login': 'login with PCC username and
 ### Set to True if the all the entire notebook directory of a user should erased and remade each time a user spawns
 ERASE_DIR = True
 
-
 ### Set to True to erase a list of files for each user
 ERASE_FILES = False
 ERASE_FILE_LIST = ['LICENSE', 'README.md', 'requirements.txt']
+
 
 ### Pull down the assignments and notes from the github repo https://github.com/ProfessorKazarinoff/ENGR101.git
 ### Give individual users the permissions to read, write and execute all files
@@ -61,9 +61,9 @@ def create_dir_hook(spawner):
         # print(f'new emtpy {repo_dir} created')
         clone_repo(username, git_url, repo_dir)
         # leave in to test file removal
-        file_to_remove1 = os.path.join(repo_dir,'LICENSE')
-        file_to_remove2 = os.path.join(repo_dir,'README.md')
-        file_to_remove3 = os.path.join(repo_dir,'requirements.txt')
+        file_to_remove1 = os.path.join(repo_dir, 'LICENSE')
+        file_to_remove2 = os.path.join(repo_dir, 'README.md')
+        file_to_remove3 = os.path.join(repo_dir, 'requirements.txt')
         try:
             os.remove(file_to_remove1)
             os.remove(file_to_remove2)
@@ -75,9 +75,9 @@ def create_dir_hook(spawner):
         os.mkdir(repo_dir)
         # print(f'new emtpy {repo_dir} created')
         clone_repo(username, git_url, repo_dir)
-        file_to_remove1 = os.path.join(repo_dir,'LICENSE')
-        file_to_remove2 = os.path.join(repo_dir,'README.md')
-        file_to_remove3 = os.path.join(repo_dir,'requirements.text')
+        file_to_remove1 = os.path.join(repo_dir, 'LICENSE')
+        file_to_remove2 = os.path.join(repo_dir, 'README.md')
+        file_to_remove3 = os.path.join(repo_dir, 'requirements.text')
         try:
             os.remove(file_to_remove1)
             os.remove(file_to_remove2)
@@ -89,7 +89,7 @@ def create_dir_hook(spawner):
         pass
 
     if ERASE_FILES == True:
-        erase_files(ERASE_FILES_LIST,repo_dir)
+        erase_files(ERASE_FILES_LIST, repo_dir)
 
     # for file in os.listdir(DIR_NAME):
     #    if os.path.isfile(os.path.join(DIR_NAME,file)):
@@ -131,13 +131,15 @@ def clone_repo(user,
             shutil.chown(os.path.join(root, f), user=uid, group=gid)
             print(f'changed permissions of {f} to uid = {uid} and gid = {gid}')
 
-def erase_files(file_lst=[],base_dir='notebooks'):
+
+def erase_files(file_lst=[], base_dir='notebooks'):
     for file_name in file_lst:
-        if os.path.exists(os.path.join(base_dir,file_name)):
+        if os.path.exists(os.path.join(base_dir, file_name)):
             try:
-                os.remove(os.path.join(base_dir,file_name))
+                os.remove(os.path.join(base_dir, file_name))
             except:
                 print(f'Can not remove file: {os.path.join(base_dir,file_name)}')
+
 
 # add the pre-spawn function to the Spawner
 # still some problems with permissions and notebooks can't be saved
