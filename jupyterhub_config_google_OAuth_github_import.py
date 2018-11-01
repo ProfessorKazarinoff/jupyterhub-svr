@@ -9,7 +9,7 @@ import csv
 root_dir = os.path.dirname(__file__)
 
 # set users other than those in a roster.csv file
-extra_users = ['peter.kazarinoff', 'dan.kruger', 'david.goldman2', 'sergio.amador']
+extra_users = ['firth.last', 'first.last', 'first.last', 'first.last']
 
 c = get_config()
 c.JupyterHub.log_level = 10
@@ -33,7 +33,7 @@ def create_dir_hook(spawner):
     :return: None
     """
     username = spawner.user.name
-    # username = "peter.kazarinoff"
+    # username = "first.last"
     # print(f'User Name: {username}')
     uid = getpwnam(username).pw_uid
     # print(f'{username} user numerical user id uid = {uid}')
@@ -119,7 +119,7 @@ c.Spawner.notebook_dir = '~/notebooks'
 
 # Cookie Secret Files
 c.JupyterHub.cookie_secret_file = '/srv/jupyterhub/jupyterhub_cookie_secret'
-c.ConfigurableHTTPProxy.auth_token = 'b04f3b3566f691bc2e03ac8625a76375cf7cbe5a39ef6e5715b64775ee2e14f3'
+c.ConfigurableHTTPProxy.auth_token = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 
 ######################################################################
 
@@ -133,13 +133,13 @@ c.LocalGoogleOAuthenticator.create_system_users = True
 c.LocalGoogleOAuthenticator.hosted_domain = 'pcc.edu'
 c.LocalGoogleOAuthenticator.login_service = 'Portland Community College'
 
-c.LocalGoogleOAuthenticator.oauth_callback_url = 'https://notebooks.problemsolving101withpython.com/hub/oauth_callback'
-c.LocalGoogleOAuthenticator.oauth_client_id = '588899608603-ga2shvbhb7ib6lfrtckob2tl3t8ifer5.apps.googleusercontent.com'
+c.LocalGoogleOAuthenticator.oauth_callback_url = 'https://mydomain.com/hub/oauth_callback'
+c.LocalGoogleOAuthenticator.oauth_client_id = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.apps.googleusercontent.com'
 
-c.LocalGoogleOAuthenticator.oauth_client_secret = 'UWcOfNihh6qoJGpUjNovAG1P'
+c.LocalGoogleOAuthenticator.oauth_client_secret = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 c.Authenticator.add_user_cmd = ['adduser', '-q', '--gecos', '""', '--disabled-password', '--force-badname']
-# c.Authenticator.whitelist = {'peter.kazarinoff','peter','sergio.amador','dan.kruger','sophia.lichensteinhill'}
-c.Authenticator.admin_users = {'peter.kazarinoff'}
+# c.Authenticator.whitelist = {'first.last','peter','first.last','first.last','first.last'}
+c.Authenticator.admin_users = {'fist.last'}
 
 c.Authenticator.whitelist = whitelist = set()
 
@@ -162,15 +162,15 @@ def user_lst_from_email_roster(txt_file):
 
     inside roster.txt
 
-    peter.kazarinoff@pcc.edu
+    peter.manchon@pcc.edu
     nelly.manning@pcc.edu
     jess.rod2@pcc.edu
 
     :param txt_file: str, file name of .txt file that contains usernames in the form of
 
-    peter.kazarinoff@pcc.edu
+    peter.manchon@pcc.edu
 
-    :return: set, a set of usernames ex: {peter.kazarinoff, nelly.manning, jess.rod2}
+    :return: set, a set of usernames ex: {peter.manchon, nelly.manning, jess.rod2}
     """
     with open(txt_file, 'r') as f:
         return [x.split('@')[0] for x in f.readlines()]

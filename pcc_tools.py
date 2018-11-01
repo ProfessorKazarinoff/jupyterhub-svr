@@ -60,14 +60,14 @@ def user_lst_from_email_roster(txt_file):
     '''
     takes a roster.txt with
 
-    peter.kazarinoff@pcc.edu
+    peter.manchobn@pcc.edu
     even.baker@pcc.edu
     nelly.manning@pcc.edu
     jess.rod2@pcc.edu
 
     and returns a list with
 
-    ['peter.kazarinoff', 'even.baker','nelly.manning','jess.rod2']
+    ['peter.manchobn', 'even.baker','nelly.manning','jess.rod2']
 
     '''
     with open(txt_file, 'r') as f:

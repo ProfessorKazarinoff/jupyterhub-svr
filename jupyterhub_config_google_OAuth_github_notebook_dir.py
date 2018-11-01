@@ -10,7 +10,7 @@ c.Spawner.cmd = '/home/peter/anaconda3/bin/jupyterhub-singleuser'
 
 # Cookie Secret Files
 c.JupyterHub.cookie_secret_file = '/srv/jupyterhub/jupyterhub_cookie_secret'
-c.ConfigurableHTTPProxy.auth_token = 'b04f3b3566f691bc2e03ac8625a76375cf7cbe5a39ef6e5715b64775ee2e14f3'
+c.ConfigurableHTTPProxy.auth_token = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 
 
 ##########################################################################
@@ -41,16 +41,16 @@ c.JupyterHub.authenticator_class = LocalGoogleOAuthenticator
 
 c.LocalGoogleOAuthenticator.create_system_users = True
 
-c.LocalGoogleOAuthenticator.hosted_domain = 'pcc.edu'
-c.LocalGoogleOAuthenticator.login_service = 'Portland Community College'
+c.LocalGoogleOAuthenticator.hosted_domain = 'college.edu'
+c.LocalGoogleOAuthenticator.login_service = 'College Name'
 
 c.LocalGoogleOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
 c.LocalGoogleOAuthenticator.oauth_client_id = os.environ['OAUTH_CLIENT_ID']
 c.LocalGoogleOAuthenticator.oauth_client_secret = os.environ['OAUTH_CLIENT_SECRET']
 #c.JupyterHub.cookie_secret_file = '/srv/jupyterhub/jupyterhub_cookie_secret'
 c.Authenticator.add_user_cmd = ['adduser', '-q', '--gecos', '""', '--disabled-password', '--force-badname']
-c.Authenticator.whitelist = {'peter.kazarinoff','peter','sergio.amador','dan.kruger'}
-c.Authenticator.admin_users = {'peter.kazarinoff'}
+c.Authenticator.whitelist = {'peter.manchon','peter','student.name','faculty.name'}
+c.Authenticator.admin_users = {'peter.manchon'}
 
 
 #import os
@@ -67,7 +67,7 @@ c.Authenticator.admin_users = {'peter.kazarinoff'}
 #c.LocalAuthenticator.create_system_users = True
 
 # specify users and admin
-#c.Authenticator.whitelist = {'peter.kazarinoff'}
+#c.Authenticator.whitelist = {'peter.manchon'}
 #c.Authenticator.admin_users = {'professorkazarinoff'}
 
 
@@ -84,7 +84,7 @@ c.Authenticator.admin_users = {'peter.kazarinoff'}
  #c.JupyterHub.ip = '127.0.0.1'
  #c.Authenticator.delete_invalid_users = True
 #c.JupyterHub.base_url = '/hub'
-#c.Authenticator.whitelist = {'peter', 'sergio', 'dan', 'peter.kazarinoff'}
+#c.Authenticator.whitelist = {'peter', 'sergio', 'dan', 'peter.manchon'}
 #c.JupyterHub.base_url = u'/notebook'
 
 # Configuration file for jupyterhub.
